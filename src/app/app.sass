@@ -16,3 +16,32 @@
 // automatically applied to the <body> element in the app.
 
 @import assets/styles/default-style
+
+
+ul
+  padding: 0 0 0 20px
+
+.content-md
+  color: #626262
+
+ion-header.menu
+  .user-zone
+    background: map-get($colors, mt-primary)
+    display: flex
+    align-items: center
+    padding: 10px
+    i
+      flex-grow: 1
+    .user-data
+      flex-grow: 4
+
+.card-holder
+  display: flex
+  justify-content: space-around
+  flex-wrap: wrap
+  .card
+    margin: 8px
+    padding: 12px
+    flex-basis: 45%
+    min-height: 15vh
+    border: 2px dashed lightgrey

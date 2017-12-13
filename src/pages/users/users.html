@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar class="toolbar-md-mt-primary-dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Usuarios</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bg-i">
+  <div class="card-holder">
+    <div class="card" *ngFor="let user of users">
+      <div class="user-data">
+        <i class="material-icons text-48 text-grey">account_circle</i>
+        <span>{{user.name}}</span>
+      </div>
+      <div class="user-info">
+        <ul>
+          <li *ngFor="let item of user.data">
+            {{item.name}}: {{item.value}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

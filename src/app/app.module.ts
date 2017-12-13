@@ -4,26 +4,43 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { UsersPage } from '../pages/users/users';
+import { RecordPage } from '../pages/record/record';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+
+export const config = {
+  apiKey: "AIzaSyCrSne2RBg5XmFbAuZ0dtUtKtvtiN6wWTg",
+  authDomain: "custard-savings.firebaseapp.com",
+  databaseURL: "https://custard-savings.firebaseio.com",
+  projectId: "custard-savings",
+  storageBucket: "custard-savings.appspot.com",
+  messagingSenderId: "39423382020"
+};
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    UsersPage,
+    RecordPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    UsersPage,
+    RecordPage
   ],
   providers: [
     StatusBar,
