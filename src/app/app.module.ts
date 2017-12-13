@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { UsersPage } from '../pages/users/users';
 import { RecordPage } from '../pages/record/record';
+import { LoginPage } from '../pages/login/login';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -27,7 +28,8 @@ export const config = {
     MyApp,
     HomePage,
     UsersPage,
-    RecordPage
+    RecordPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ export const config = {
     MyApp,
     HomePage,
     UsersPage,
-    RecordPage
+    RecordPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

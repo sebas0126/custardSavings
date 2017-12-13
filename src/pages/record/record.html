@@ -1,15 +1,30 @@
 <ion-header>
-    <ion-navbar class="toolbar-md-mt-primary-dark">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-      <ion-title>Historial</ion-title>
-    </ion-navbar>
-  </ion-header>
-  
+  <ion-navbar class="toolbar-md-mt-primary-dark">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Historial</ion-title>
+  </ion-navbar>
+</ion-header>
+
 
 
 <ion-content padding class="bg-i">
-  
+  <ul class="pay-record">
+    <li class="pay pay-title">
+      <div class="item">Ciclo</div>
+      <div class="item">Abono</div>
+      <div class="item">Fecha</div>
+    </li>
+    <li class="pay" *ngFor="let pay of pays">
+      <div class="item loop">{{pay.loop}}</div>
+      <div class="item money">{{pay.money}}</div>
+      <div class="item date">{{pay.date | date: 'dd/MM/yyyy'}}</div>
+    </li>
+  </ul>
+  <div class="btn-field">
+    <button class="btn" type="button">Abonar<i class="material-icons">attach_money</i></button>
+    <button class="btn" type="button">Compartir<i class="material-icons">share</i></button>
+  </div>
 
 </ion-content>

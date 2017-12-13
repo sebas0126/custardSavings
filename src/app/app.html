@@ -3,17 +3,17 @@
     <div class="user-zone">
       <i class="material-icons text-48 text-white">account_circle</i>
       <div class="user-data">
-        Nombre: Pepito
+        Rafael
       </div>
     </div>
   </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+  <ion-content class="bg-i">
+    <ul class="menu-items">
+      <li class="item" menuClose *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
-      </button>
-    </ion-list>
+      </li>
+    </ul>
   </ion-content>
 
 </ion-menu>
