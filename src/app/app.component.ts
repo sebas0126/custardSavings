@@ -8,8 +8,13 @@ import { UsersPage } from '../pages/users/users';
 import { RecordPage } from '../pages/record/record';
 import { LoginPage } from '../pages/login/login';
 
+import { FirestoreProvider } from '../providers/firestore/firestore';
+
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers: [
+    FirestoreProvider
+  ]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;

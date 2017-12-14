@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { AngularFirestore } from 'angularfire2/firestore';
-
 import { Observable } from 'rxjs/observable';
 
-import { JsonPipe } from '@angular/common';
+import { FirestoreProvider } from '../../providers/firestore/firestore';
 
 @Component({
   selector: 'page-home',
@@ -80,17 +78,13 @@ export class HomePage {
     }
   ]
 
-  items: Observable<any[]>;
-
   constructor(
     public navCtrl: NavController,
-    public db: AngularFirestore) {
-
-
-    // this.items = db.collection('users').valueChanges();
-
+    fbSrvc: FirestoreProvider
+  ) {
+    fbSrvc.getUsers();
   }
 
-
+  
 
 }

@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
+import { FirestoreProvider } from '../providers/firestore/firestore';
 
 export const config = {
   apiKey: "AIzaSyCrSne2RBg5XmFbAuZ0dtUtKtvtiN6wWTg",
@@ -48,7 +49,8 @@ export const config = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FirestoreProvider
   ]
 })
 export class AppModule {}
