@@ -82,7 +82,7 @@ export class HomePage {
     public navCtrl: NavController,
     fbSrvc: FirestoreProvider
   ) {
-    fbSrvc.getUsers();
+    fbSrvc.addUser({name: "prueba"}, "123");
   }
 
   

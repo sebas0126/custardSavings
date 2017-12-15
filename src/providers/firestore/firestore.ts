@@ -20,6 +20,7 @@ export class FirestoreProvider {
   //   this.db.
   // }
 
+
   getUsers() {
     if (!this.users) {
       this.userCollection = this.db.collection('users');
@@ -28,7 +29,8 @@ export class FirestoreProvider {
     return this.users;
   }
 
-  addUser(user: {}, id: "") {
+  addUser(user: {}, id: string) {
+    this.userCollection = this.db.collection('users');
     this.userCollection.doc(id).set(user)
       .then(res => {
         return res;
@@ -37,7 +39,7 @@ export class FirestoreProvider {
       })
   }
 
-  getUser(id: ""){
+  getUser(id: "") {
     return this.userCollection.doc(id);
   }
 
