@@ -80,11 +80,16 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    fbSrvc: FirestoreProvider
+    fsSrvc: FirestoreProvider
   ) {
-    fbSrvc.addUser({name: "prueba"}, "123");
+    fsSrvc.addUserToSaving("222222", "TyIqwSkeisGLb2jLBfCl")
+      .then(res => {
+        console.log(res);
+      }).catch(err => {
+        console.log(err);
+      })
   }
 
-  
+
 
 }

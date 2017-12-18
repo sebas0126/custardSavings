@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+
+import { Strings } from '../../classes/strings';
 
 import { Observable } from 'rxjs/observable';
 
@@ -22,14 +24,15 @@ export class FirestoreProvider {
 
 
   getUsers() {
-    if (!this.users) {
-      this.userCollection = this.db.collection('users');
-      this.users = this.userCollection.valueChanges();
-    }
+    this.userCollection = this.db.collection('users');
+    this.users = this.userCollection.valueChanges();
+    this.users.subscribe(obs => {
+      console.log(obs);
+    })
     return this.users;
   }
 
-  addUser(user: {}, id: string) {
+  createUser(user: {}, id: string) {
     this.userCollection = this.db.collection('users');
     this.userCollection.doc(id).set(user)
       .then(res => {
@@ -39,8 +42,21 @@ export class FirestoreProvider {
       })
   }
 
-  getUser(id: "") {
-    return this.userCollection.doc(id);
+  addUserToSaving(userId: string, savingId: string){
+    return this.db.doc(Strings.FIRESTORE_DATABASE.COL_SAVINGS + `/${savingId}/` + Strings.FIRESTORE_DATABASE.COL_USERS + `/${userId}`)
+    .set({record: [], total: 0}, {merge: true});
+  }
+
+  getSavingUser(id: string) {
+
+  }
+
+  getUser(id: string): Observable<any> {
+    var user: Observable<any> = this.db.collection('users').doc(id).valueChanges();
+    user.subscribe(res => {
+      console.log(res);
+    })
+    return user;
   }
 
 }

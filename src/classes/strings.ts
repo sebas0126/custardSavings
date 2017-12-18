@@ -1,0 +1,6 @@
+export class Strings{
+  static FIRESTORE_DATABASE = {
+    COL_SAVINGS: "savings",
+    COL_USERS: "users"
+  }
+}
