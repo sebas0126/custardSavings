@@ -82,12 +82,13 @@ export class HomePage {
     public navCtrl: NavController,
     fsSrvc: FirestoreProvider
   ) {
-    fsSrvc.addUserToSaving("222222", "TyIqwSkeisGLb2jLBfCl")
-      .then(res => {
-        console.log(res);
-      }).catch(err => {
-        console.log(err);
-      })
+    // fsSrvc.addUserToSaving("222222", "TyIqwSkeisGLb2jLBfCl")
+    //   .then(res => {
+    //     console.log(res);
+    //   }).catch(err => {
+    //     console.log(err);
+    //   })
+    // fsSrvc.addMoney("222222", "TyIqwSkeisGLb2jLBfCl", {money: 2000, date: new Date});
   }
 
 

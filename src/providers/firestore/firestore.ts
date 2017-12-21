@@ -18,10 +18,10 @@ export class FirestoreProvider {
 
   }
 
-  // addSaving(){
-  //   this.db.
-  // }
-
+  addMoney(userId: string, savingId: string, data: {}){
+    return this.db.doc(Strings.FIRESTORE_DATABASE.COL_SAVINGS + `/${savingId}/` + Strings.FIRESTORE_DATABASE.COL_USERS + `/${userId}/`)
+    .collection(Strings.FIRESTORE_DATABASE.COL_RECORDS).add(data);
+  }
 
   getUsers() {
     this.userCollection = this.db.collection('users');
@@ -45,10 +45,6 @@ export class FirestoreProvider {
   addUserToSaving(userId: string, savingId: string){
     return this.db.doc(Strings.FIRESTORE_DATABASE.COL_SAVINGS + `/${savingId}/` + Strings.FIRESTORE_DATABASE.COL_USERS + `/${userId}`)
     .set({record: [], total: 0}, {merge: true});
-  }
-
-  getSavingUser(id: string) {
-
   }
 
   getUser(id: string): Observable<any> {
