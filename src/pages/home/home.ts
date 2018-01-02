@@ -88,7 +88,7 @@ export class HomePage {
     //   }).catch(err => {
     //     console.log(err);
     //   })
-    // fsSrvc.addMoney("222222", "TyIqwSkeisGLb2jLBfCl", {money: 2000, date: new Date});
+    // fsSrvc.addMoney("222222", "TyIqwSkeisGLb2jLBfCl", {money: 2000, date: new Date });
   }
 
 

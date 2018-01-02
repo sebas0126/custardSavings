@@ -8,18 +8,40 @@
 
 
 <ion-content padding class="bg-i">
-  <form action="">
-    <p>&nbsp;</p>
-    <div class="input-field">
-      <label for="txt-email">Email</label>
-      <input type="text" name="" id="txt-email">
+  <p>&nbsp;</p>
+  <div class="input-field">
+    <input [disabled]="currentUser" type="number" [(ngModel)]="userCredentials.id" (keyup)="getUserData($event)" placeholder="Identificación"
+      name="txt-id" id="txt-id" #txtId="ngModel" required>
+  </div>
+  <div [hidden]="currentUser || txtId.pristine">
+    No se encontro la identificación
+  </div>
+  <div *ngIf="currentUser">
+    <div *ngIf="!currentUser.active; else elseBlock">
+      <form action="" #registerForm="ngForm" (ngSubmit)="register()">
+        <div class="input-field">
+          <input pattern=".{5,10}" type="password" [(ngModel)]="userCredentials.pass" placeholder="Nueva contraseña" name="txt-pass"
+            id="txt-pass" required>
+        </div>
+        <div class="input-field">
+          <input type="password" [(ngModel)]="userCredentials.repass" placeholder="Repetir contraseña" name="txt-repass" id="txt-repass"
+            required>
+        </div>
+        <div class="btn-field">
+          <button [disabled]="!registerForm.form.valid || !matchPassword()" class="btn" type="submit">Guardar</button>
+        </div>
+      </form>
     </div>
-    <div class="input-field">
-      <label for="txt-id">Identificación</label>
-      <input type="text" name="" id="txt-id">
-    </div>
-    <div class="btn-field">
-      <button class="btn" type="submit" (click)="login()">Iniciar sesion</button>
-    </div>
-  </form>
+    <ng-template #elseBlock>
+      <form action="" #loginForm="ngForm" (ngSubmit)="login()">
+        <div class="input-field">
+          <input pattern=".{5,10}" type="password" [(ngModel)]="userCredentials.pass" placeholder="Contraseña" name="txt-pass" id="txt-pass"
+            required>
+        </div>
+        <div class="btn-field">
+          <button [disabled]="!loginForm.form.valid" class="btn" type="submit">Iniciar sesión</button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
 </ion-content>
