@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-
 import { NgModel } from '@angular/forms';
-
-import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 import { Subject } from 'rxjs/Subject';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/observable';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+//Providers
+import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { UserProvider } from '../../providers/user/user';
 
 @Component({
   selector: 'page-login',
@@ -28,7 +28,8 @@ export class LoginPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public fsSrvc: FirestoreProvider
+    public fsSrvc: FirestoreProvider,
+    public userSrvc: UserProvider
   ) {
     this.userCredentials = {
       id: "",
@@ -40,6 +41,8 @@ export class LoginPage implements OnInit {
   login() {
     let b64 = btoa(this.userCredentials.pass)
     if (b64 === this.currentUser.pass) {
+      this.userSrvc.userData = this.currentUser;
+      this.userSrvc.storeCredentials(this.userCredentials);
       this.navCtrl.setRoot(HomePage);
     }
   }
@@ -57,6 +60,10 @@ export class LoginPage implements OnInit {
     this.searchTerms.next(e.target.value);
   }
 
+  findUser(id){
+    this.searchTerms.next(id);
+  }
+
   ngOnInit() {
     this.searchTerms.pipe(
       debounceTime(300),
@@ -64,8 +71,6 @@ export class LoginPage implements OnInit {
       switchMap((term: string) => this.fsSrvc.getUser(term))
     ).subscribe(data => {
       this.currentUser = data;
-      this.userExists = true;
-      console.log(data);
     })
   }
 
@@ -74,7 +79,19 @@ export class LoginPage implements OnInit {
   }
 
   ionViewDidLoad() {
-
+    this.userSrvc.getStoredCredentials()
+    .then(data => {
+      if(data){
+        this.userCredentials = data;
+        this.fsSrvc.getUser("" + data.id)
+        .subscribe(data => {
+          this.currentUser = data;
+          this.login();
+        })
+      }
+    }).catch(err => {
+      console.log(err);
+    });
   }
 
 }

@@ -20,14 +20,10 @@ export class FirestoreProvider {
       .collection(Strings.FIRESTORE_DATABASE.COL_RECORDS).add(data);
   }
 
-  // getUsers() {
-  //   this.userCollection = this.db.collection('users');
-  //   this.users = this.userCollection.valueChanges();
-  //   this.users.subscribe(obs => {
-  //     console.log(obs);
-  //   })
-  //   return this.users;
-  // }
+  getUsers(savingId) {
+    var users = this.db.collection(Strings.FIRESTORE_DATABASE.COL_SAVINGS + `/${savingId}/` + Strings.FIRESTORE_DATABASE.COL_USERS);
+    return users;
+  }
 
   // createUser(user: {}, id: string) {
   //   this.userCollection = this.db.collection('users');

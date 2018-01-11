@@ -9,11 +9,13 @@ import { RecordPage } from '../pages/record/record';
 import { LoginPage } from '../pages/login/login';
 
 import { FirestoreProvider } from '../providers/firestore/firestore';
+import { UserProvider } from '../providers/user/user';
 
 @Component({
   templateUrl: 'app.html',
   providers: [
-    FirestoreProvider
+    FirestoreProvider,
+    UserProvider
   ]
 })
 export class MyApp {

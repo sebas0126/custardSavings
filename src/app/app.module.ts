@@ -14,6 +14,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule, AngularFirestore } from 'angularfire2/firestore';
 import { FirestoreProvider } from '../providers/firestore/firestore';
+import { UserProvider } from '../providers/user/user';
+import { IonicStorageModule } from '@ionic/storage';
+import { PopMenuPageModule } from '../pages/pop-menu/pop-menu.module'
+import { PopMenuPage } from '../pages/pop-menu/pop-menu';
 
 export const config = {
   apiKey: "AIzaSyCrSne2RBg5XmFbAuZ0dtUtKtvtiN6wWTg",
@@ -36,7 +40,9 @@ export const config = {
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(config),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    IonicStorageModule.forRoot(),
+    PopMenuPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -50,7 +56,8 @@ export const config = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FirestoreProvider
+    FirestoreProvider,
+    UserProvider
   ]
 })
 export class AppModule {}

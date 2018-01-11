@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
-
+import { NavController, PopoverController } from 'ionic-angular';
 import { Observable } from 'rxjs/observable';
 
+//Providers
 import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { UserProvider } from '../../providers/user/user';
+
+//Components
+import { PopMenuPage } from '../../pages/pop-menu/pop-menu';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  currentUser;
+  currentSaving;
 
   public cards = [
     {
@@ -80,8 +87,13 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    fsSrvc: FirestoreProvider
+    private fsSrvc: FirestoreProvider,
+    private popCtrl: PopoverController,
+    private userSrvc: UserProvider
   ) {
+    this.currentUser = this.userSrvc.userData;
+    this.currentSaving = this.currentUser.savings[0];
+    this.userSrvc.currentSaving = this.currentSaving;
     // fsSrvc.addUserToSaving("222222", "TyIqwSkeisGLb2jLBfCl")
     //   .then(res => {
     //     console.log(res);
@@ -91,6 +103,11 @@ export class HomePage {
     // fsSrvc.addMoney("222222", "TyIqwSkeisGLb2jLBfCl", {money: 2000, date: new Date });
   }
 
-
+  showSavings(e){
+    let pop = this.popCtrl.create(PopMenuPage, {userSavings: this.userSrvc.userData.savings});
+    pop.present({
+      ev: e
+    });
+  }
 
 }

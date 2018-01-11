@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Observable } from 'rxjs/observable';
+
+// Providers
+import { FirestoreProvider } from '../../providers/firestore/firestore';
+import { UserProvider } from '../../providers/user/user';
 
 @Component({
   selector: 'page-users',
@@ -7,42 +12,27 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UsersPage {
 
-  public users = [
-    {
-      name: "Miguel Angel",
-      image: "",
-      data: [
-        {
-          name: "Dinero",
-          value: "$300"
-        },
-        {
-          name: "Eventos",
-          value: 2
-        }
-      ]
-    },
-    {
-      name: "Donatello",
-      image: "",
-      data: [
-        {
-          name: "Dinero",
-          value: "$400"
-        },
-        {
-          name: "Eventos",
-          value: 3
-        }
-      ]
-    }
-  ]
+  users;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private fsSrvc: FirestoreProvider,
+    private userSrvc: UserProvider
+  ) {
+
+  }
+
+  addUser(){
+    
+  }
+
+  getUsers() {
+    this.users = this.fsSrvc.getUsers(this.userSrvc.currentSaving.id).valueChanges();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UsersPage');
+    this.getUsers();
   }
 
 }

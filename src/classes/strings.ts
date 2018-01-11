@@ -4,4 +4,7 @@ export class Strings{
     COL_USERS: "users",
     COL_RECORDS: "records"
   }
+  static STORAGE = {
+    CREDENTIALS: "credentials"
+  }
 }
